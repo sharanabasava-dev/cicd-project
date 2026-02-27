@@ -35,9 +35,12 @@ push:
     - docker:24-dind
   dependencies:
     - build
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
   script:
     - docker load < image.tar
-    - docker login -u sharana123 -p $DOCKER_HUB_PASS
+    - docker login registry-1.docker.io -u sharana123 --password $DOCKER_HUB_PASS
     - docker push sharana123/cicd-app:$CI_COMMIT_SHORT_SHA
     - docker tag sharana123/cicd-app:$CI_COMMIT_SHORT_SHA sharana123/cicd-app:latest
     - docker push sharana123/cicd-app:latest
