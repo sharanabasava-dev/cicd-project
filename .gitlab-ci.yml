@@ -41,7 +41,7 @@ push:
     - build
   script:
     - docker load < image.tar
-    - echo "sharana123passwd" | docker login -u sharana123 --password-stdin
+    - echo "Dockerhub@123" | docker login -u sharana123 --password-stdin
     - docker push sharana123/cicd-app:$CI_COMMIT_SHORT_SHA
     - docker tag sharana123/cicd-app:$CI_COMMIT_SHORT_SHA sharana123/cicd-app:latest
     - docker push sharana123/cicd-app:latest
