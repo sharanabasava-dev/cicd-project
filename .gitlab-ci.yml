@@ -32,15 +32,16 @@ push:
   stage: push
   image: docker:24
   services:
-    - docker:24-dind
-  dependencies:
-    - build
+    - name: docker:24-dind
+      alias: docker
   variables:
     DOCKER_HOST: tcp://docker:2375
     DOCKER_TLS_CERTDIR: ""
+  dependencies:
+    - build
   script:
     - docker load < image.tar
-    - docker login registry-1.docker.io -u sharana123 --password $DOCKER_HUB_PASS
+    - echo "sharana123passwd" | docker login -u sharana123 --password-stdin
     - docker push sharana123/cicd-app:$CI_COMMIT_SHORT_SHA
     - docker tag sharana123/cicd-app:$CI_COMMIT_SHORT_SHA sharana123/cicd-app:latest
     - docker push sharana123/cicd-app:latest
