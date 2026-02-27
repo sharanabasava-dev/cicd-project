@@ -37,13 +37,12 @@ push:
     - build
   script:
     - docker load < image.tar
-    - echo $DOCKER_HUB_PASS | docker login -u $DOCKER_HUB_USER --password-stdin
-    - docker push $IMAGE_NAME:$IMAGE_TAG
-    - docker tag $IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME:latest
-    - docker push $IMAGE_NAME:latest
+    - docker login -u sharana123 -p $DOCKER_HUB_PASS
+    - docker push sharana123/cicd-app:$CI_COMMIT_SHORT_SHA
+    - docker tag sharana123/cicd-app:$CI_COMMIT_SHORT_SHA sharana123/cicd-app:latest
+    - docker push sharana123/cicd-app:latest
   only:
     - main
-
 deploy:
   stage: deploy
   image: alpine:latest
