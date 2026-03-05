@@ -1,5 +1,23 @@
 # CI/CD Pipeline Project using GitLab, Docker, and AWS EC2
+## Architecture Diagram
 
+Developer
+   │
+   ▼
+GitLab Repository
+   │
+   ▼
+GitLab CI/CD Pipeline
+   │
+   ├── Build Docker Image
+   ├── Push Image to Docker Hub
+   └── Deploy to AWS EC2 via SSH
+            │
+            ▼
+      Docker Container Running
+            │
+            ▼
+     Application Available on Internet
 ## Project Overview
 This project demonstrates a complete **End-to-End CI/CD pipeline** where code pushed to the repository automatically builds a Docker image, pushes it to Docker Hub, and deploys the application to an AWS EC2 instance.
 
